@@ -1,17 +1,16 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
+    x:Class="MyDimDim.Views.DashboardPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:MyDimDim.Converters"
     xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-    x:Class="MyDimDim.Views.DashboardPage"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     BackgroundColor="#f7f8fa">
     <ContentPage.Content>
         <ScrollView>
 
-            <StackLayout
-                Padding="10">
+            <StackLayout Padding="10">
                 <material:MaterialCard
                     CornerRadius="20"
                     Elevation="2"
@@ -19,7 +18,7 @@
 
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
@@ -32,64 +31,61 @@
 
                             <Label
                                 Grid.Row="1"
-                                FontSize="Title"
                                 FontAttributes="Bold"
-                                TextColor="{StaticResource ColorRevenue}"
+                                FontSize="Title"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding Balance, StringFormat='{0:R$ ###,###,##0.00}'}" />
+                                Text="{Binding Balance, StringFormat='{0:R$ ###,###,##0.00}'}"
+                                TextColor="{StaticResource ColorRevenue}" />
                         </StackLayout>
 
-                        <Grid
-                            Grid.Row="1">
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40" />
                             </Grid.RowDefinitions>
 
                             <StackLayout
-                                Grid.Column="0"
                                 Grid.Row="0"
+                                Grid.Column="0"
                                 Orientation="Horizontal">
 
-                                <Image
-                                    Source="arrow_down"/>
+                                <Image Source="arrow_down" />
 
                                 <StackLayout>
                                     <Label
                                         FontSize="Micro"
-                                        TextColor="Gray"
-                                        Text="Receitas"/>
+                                        Text="Receitas"
+                                        TextColor="Gray" />
 
                                     <Label
                                         FontSize="Large"
-                                        TextColor="{StaticResource ColorRevenue}"
-                                        Text="{Binding Revenues, StringFormat='{0:R$ ###,###,##0.00}'}" />
+                                        Text="{Binding Revenues, StringFormat='{0:R$ ###,###,##0.00}'}"
+                                        TextColor="{StaticResource ColorRevenue}" />
                                 </StackLayout>
 
                             </StackLayout>
 
                             <StackLayout
-                                Grid.Column="1"
                                 Grid.Row="0"
+                                Grid.Column="1"
                                 Orientation="Horizontal">
 
-                                <Image
-                                    Source="arrow_up"/>
+                                <Image Source="arrow_up" />
 
                                 <StackLayout>
                                     <Label
                                         FontSize="Micro"
-                                        TextColor="Gray"
-                                        Text="Despesas"/>
+                                        Text="Despesas"
+                                        TextColor="Gray" />
 
                                     <Label
                                         FontSize="Large"
-                                        TextColor="{StaticResource ColorExpense}"
-                                        Text="{Binding Expenses, StringFormat='{0:R$ ###,###,##0.00}'}" />
+                                        Text="{Binding Expenses, StringFormat='{0:R$ ###,###,##0.00}'}"
+                                        TextColor="{StaticResource ColorExpense}" />
                                 </StackLayout>
 
                             </StackLayout>
@@ -100,40 +96,33 @@
 
                 </material:MaterialCard>
 
-                <Label
-                    Text="Despesas por Categoria"
-                    TextColor="Gray"
-                    />
+                <Label Text="Despesas por Categoria" TextColor="Gray" />
 
                 <microcharts:ChartView
                     x:Name="chartView"
-                    HorizontalOptions="FillAndExpand"
+                    Chart="{Binding Chart}"
                     HeightRequest="160"
-                    Chart="{Binding Chart}"/>
+                    HorizontalOptions="FillAndExpand" />
 
-                <Label
-                    Text="Movimentações dos Próximos 7 Dias"
-                    TextColor="Gray"
-                    />
+                <Label Text="Movimentações dos Próximos 7 Dias" TextColor="Gray" />
 
                 <CollectionView
-                    ItemsSource="{Binding Movimentations}"
+                    HeightRequest="100"
                     ItemsLayout="HorizontalList"
-                    HeightRequest="100">
+                    ItemsSource="{Binding Movimentations}">
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout
-                                Padding="10">
+                            <StackLayout Padding="10">
                                 <material:MaterialCard
+                                    Padding="5"
                                     CornerRadius="10"
-                                    WidthRequest="130"
                                     Elevation="2"
-                                    Padding="5">
+                                    WidthRequest="130">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="30"/>
-                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
@@ -144,22 +133,22 @@
                                         <Image
                                             Grid.Row="0"
                                             Grid.Column="0"
-                                            Source="{Binding Type, Converter={converters:IconMovimentationTypeConverter}}"/>
+                                            Source="{Binding Type, Converter={converters:IconMovimentationTypeConverter}}" />
 
                                         <Label
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             FontSize="Medium"
-                                            VerticalTextAlignment="Center"
+                                            Text="{Binding Value, StringFormat='{0:R$ ###,###,##0.00}'}"
                                             TextColor="{Binding Type, Converter={converters:ColorMovimentationTypeConverter}}"
-                                            Text="{Binding Value, StringFormat='{0:R$ ###,###,##0.00}'}"/>
+                                            VerticalTextAlignment="Center" />
 
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             Grid.ColumnSpan="2"
-                                            Text="{Binding Name}"
-                                            FontSize="Small"/>
+                                            FontSize="Small"
+                                            Text="{Binding Name}" />
                                     </Grid>
                                 </material:MaterialCard>
                             </StackLayout>
@@ -167,62 +156,58 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label
-                    Text="Cartões de Crédito"
-                    TextColor="Gray"
-                    />
+                <Label Text="Cartões de Crédito" TextColor="Gray" />
 
                 <CollectionView
-                    ItemsSource="{Binding CreditCards}"
+                    HeightRequest="190"
                     ItemsLayout="HorizontalList"
-                    HeightRequest="190">
+                    ItemsSource="{Binding CreditCards}">
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout
-                                Padding="5">
+                            <StackLayout Padding="5">
                                 <material:MaterialCard
-                                    CornerRadius="10"
-                                    WidthRequest="240"
-                                    Elevation="2"
                                     Padding="10"
-                                    BackgroundColor="{Binding CardColor}">
+                                    BackgroundColor="{Binding CardColor}"
+                                    CornerRadius="10"
+                                    Elevation="2"
+                                    WidthRequest="240">
                                     <StackLayout>
                                         <Label
                                             Grid.Row="0"
                                             FontAttributes="Bold"
-                                            TextColor="{Binding TextColor}"
+                                            FontSize="Small"
                                             Text="{Binding Name}"
-                                            FontSize="Small"/>
+                                            TextColor="{Binding TextColor}" />
 
                                         <Label
                                             Grid.Row="1"
+                                            FontAttributes="Bold"
                                             FontSize="Large"
                                             HorizontalTextAlignment="End"
-                                            VerticalTextAlignment="Center"
-                                            FontAttributes="Bold"
+                                            Text="{Binding BillValue, StringFormat='{0:R$ ###,###,##0.00}'}"
                                             TextColor="{Binding TextColor}"
-                                            Text="{Binding BillValue, StringFormat='{0:R$ ###,###,##0.00}'}"/>
+                                            VerticalTextAlignment="Center" />
 
                                         <Label
                                             Grid.Row="2"
-                                            HorizontalTextAlignment="End"
-                                            VerticalTextAlignment="Center"
                                             FontSize="Small"
+                                            HorizontalTextAlignment="End"
+                                            Text="{Binding Expiration, StringFormat='Vence em: {0:dd/MMM}'}"
                                             TextColor="{Binding TextColor}"
-                                            Text="{Binding Expiration, StringFormat='Vence em: {0:dd/MMM}'}"/>
+                                            VerticalTextAlignment="Center" />
 
                                         <Label
                                             Grid.Row="3"
                                             HorizontalTextAlignment="Center"
-                                            TextColor="{Binding TextColor}"
-                                            Text="{Binding Number}"/>
+                                            Text="{Binding Number}"
+                                            TextColor="{Binding TextColor}" />
 
                                         <BoxView
                                             Grid.Row="4"
                                             Margin="-10,0"
-                                            BackgroundColor="Black"/>
-                                        
+                                            BackgroundColor="Black" />
+
                                     </StackLayout>
                                 </material:MaterialCard>
                             </StackLayout>
