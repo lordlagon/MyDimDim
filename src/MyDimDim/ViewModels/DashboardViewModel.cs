@@ -44,7 +44,7 @@ namespace MyDimDim.ViewModels
 
         public DashboardViewModel()
         {
-            Balance = 5530;
+            Balance = 6530;
             Revenues = 2500;
             Expenses = 2335;
 
